@@ -1,0 +1,43 @@
+import RPi.GPIO as GPIO
+from mfrc522 import SimpleMFRC522
+from time import sleep
+
+reader = SimpleMFRC522()
+print("Welcome to RFID Practical")
+
+while True:
+    print("")
+    print("Choose your Option")
+    print("1. Write your Tag")
+    print("2. Read your Tag")
+    print("3. Delete the content")
+    print("Press any key to Exit")
+    print("")
+
+    a = input("Enter your option: ")
+
+    if a == "1":
+        text = input("New data: ")
+        print("Now Place your Tag to write")
+        reader.write(text)
+        print("Written")
+        sleep(1)
+
+    elif a == "2":
+        print("Now Place your Tag to read")
+        id, text = reader.read()
+        print("ID:", id)
+        print("Data:", text)
+        sleep(1)
+
+    elif a == "3":
+        text = ""
+        print("Now Place your Tag to Reset")
+        reader.write(text)
+        print("Data Deleted")
+        sleep(1)
+
+    else:
+        break
+
+GPIO.cleanup()
